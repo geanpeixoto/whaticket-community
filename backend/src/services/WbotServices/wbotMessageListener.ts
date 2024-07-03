@@ -105,7 +105,7 @@ const verifyMediaMessage = async (
       media.data,
       "base64"
     );
-  } catch (err) {
+  } catch (err: any) {
     Sentry.captureException(err);
     logger.error(err);
   }
@@ -409,7 +409,7 @@ const handleMessage = async (
         console.log(error);
       }
     } */
-  } catch (err) {
+  } catch (err: any) {
     Sentry.captureException(err);
     logger.error(`Error handling whatsapp message: Err: ${err}`);
   }
@@ -440,7 +440,7 @@ const handleMsgAck = async (msg: WbotMessage, ack: MessageAck) => {
       action: "update",
       message: messageToUpdate
     });
-  } catch (err) {
+  } catch (err: any) {
     Sentry.captureException(err);
     logger.error(`Error handling message ack. Err: ${err}`);
   }

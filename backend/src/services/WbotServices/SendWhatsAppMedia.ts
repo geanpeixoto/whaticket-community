@@ -24,7 +24,7 @@ const SendWhatsAppMedia = async ({
       : undefined;
 
     const newMedia = MessageMedia.fromFilePath(media.path);
-    
+
     let mediaOptions:MessageSendOptions = {
         caption: hasBody,
         sendAudioAsVoice: true
@@ -33,7 +33,7 @@ const SendWhatsAppMedia = async ({
     if (newMedia.mimetype.startsWith('image/') && ! /^.*\.(jpe?g|png|gif)?$/i.exec(media.filename)) {
        mediaOptions['sendMediaAsDocument'] = true;
     }
-    
+
     const sentMessage = await wbot.sendMessage(
       `${ticket.contact.number}@${ticket.isGroup ? "g" : "c"}.us`,
       newMedia,
@@ -45,7 +45,7 @@ const SendWhatsAppMedia = async ({
     fs.unlinkSync(media.path);
 
     return sentMessage;
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     throw new AppError("ERR_SENDING_WAPP_MSG");
   }
